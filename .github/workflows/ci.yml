@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: model-artifact
-          path: models/
+          path: data/
   
   build-and-test-container:
     name: Build and Test Docker Container
