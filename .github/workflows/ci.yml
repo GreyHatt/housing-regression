@@ -51,6 +51,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       - name: Build Docker Image
-        run: docker build -t hosuing-regression:latest .
+        run: docker build -t housing-regression:latest .
       - name: Run Tests in Docker Container
         run: docker run --rm housing-regression:latest
