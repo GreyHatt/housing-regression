@@ -120,3 +120,13 @@ Evaluation Metrics: {'mean_absolute_error': 0.5332001304956985, 'mean_squared_er
 
 #### Step 6:
 - Created `CI/CD` workflow file.
+- Successfully executed workflow - [Link](https://github.com/GreyHatt/housing-regression/actions/runs/16621322308)
+
+#### Comparison Metrics
+
+| Metric                       | LinearRegression      | Quantized (uint8)       | Quantized (uint16)            |
+|------------------------------|-----------------------|-------------------------|-------------------------------|
+| R² Score                     | 0.5758                | -0.1798                 | 0.5758                        |
+| Mean Absolute Error          | 0.533                 | 1.016                   | 0.5344                        |
+| Mean Squared  Error          | 0.556                 | 1.546                   | 0.556                         |
+|------------------------------|-----------------------|-------------------------|-------------------------------|
