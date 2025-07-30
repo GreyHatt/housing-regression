@@ -30,8 +30,12 @@ Commit ID: [36cd468](https://github.com/GreyHatt/housing-regression/commit/36cd4
         python -m src.train.py
         ```
     - After testing out locally below are the logs
-        ```json
-            {'mean_absolute_error': 0.5332001304956976, 'mean_squared_error': 0.5558915986952426, 'r2_score': 0.5757877060324521}
+        ```text
+            {
+                'mean_absolute_error': 0.5332001304956976, 
+                'mean_squared_error': 0.5558915986952426, 
+                'r2_score': 0.5757877060324521
+            }
         ```
         ```text
         Model saved to data/trained_model.pkl
@@ -58,7 +62,7 @@ teststest_trainpy ....                  [100%]
 ```
 
 #### Step 4:
-Commit ID: 
+Commit ID: [25bef92](https://github.com/GreyHatt/housing-regression/commit/25bef9299a512f9c549a41c4f08158aa09d6eefa)
 - Created `src/quantize.py` file.
 - Add `load_model` method in `src/utils.py` file.
 - In `quantize.py` file
@@ -70,9 +74,46 @@ Commit ID:
         ```
     - Output
         ```text
-        Quantization metrics: {'mean_absolute_error': 1.016262825917015, 'mean_squared_error': 1.546130459757296, 'r2_score': -0.17988390298792845}
+        Quantization metrics: 
+            {
+                'mean_absolute_error': 1.016262825917015, 
+                'mean_squared_error': 1.546130459757296, 
+                'r2_score': -0.17988390298792845
+            }
         ```
     - However, if used in16
         ```text
-        Quantization metrics: {'mean_absolute_error': 0.5344431924510482, 'mean_squared_error': 0.5559100099242476, 'r2_score': 0.5757736560455315}
+        Quantization metrics: 
+            {
+                'mean_absolute_error': 0.5344431924510482, 
+                'mean_squared_error': 0.5559100099242476, 
+                'r2_score': 0.5757736560455315
+            }
         ```
+
+#### Step 5:
+Commit ID: 
+- Created `Dockerfile` file.
+- Created `src/predict.py` file.
+    - Printed sample predictions
+    - Added metrics for evaluation
+- Command to test it
+    ```bash
+    docker build -t housing-regression .
+    docker run --rm housing-regression
+    ```
+- Output when test it locally
+```text
+(mlops) logan@Bhardwajs-MacBook-Air housing-regression % docker run  housing-model      
+{'mean_absolute_error': 0.5332001304956985, 'mean_squared_error': 0.5558915986952427, 'r2_score': 0.575787706032452}
+Model saved to data/trained_model.joblib
+Model loaded from data/trained_model.joblib
+Sample Outputs
+Predicted: 0.7191, Actual: 0.4770
+Predicted: 1.7640, Actual: 0.4580
+Predicted: 2.7097, Actual: 5.0000
+Predicted: 2.8389, Actual: 2.1860
+Predicted: 2.6047, Actual: 2.7800
+Evaluation Metrics: {'mean_absolute_error': 0.5332001304956985, 'mean_squared_error': 0.5558915986952427, 'r2_score': 0.575787706032452}
+(mlops) logan@Bhardwajs-MacBook-Air housing-regression % 
+```
