@@ -34,11 +34,38 @@ def evaluate_model(y_true, y_pred) -> dict:
         "r2_score": r2_score(y_true, y_pred),
     }
 
-
-def save_model(model, path) -> None:
+def save_object(object, path) -> None:
     """
     Save the trained model to a file.
     """
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    joblib.dump(model, path)
+    joblib.dump(object, path)
     print(f"Model saved to {path}")
+
+def load_model(path):
+    """
+    Load a trained model from a file.
+    """
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Model file not found at {path}")
+    model = joblib.load(path)
+    print(f"Model loaded from {path}")
+    return model
+
+def save_params(method, coef, intercept, params_path):
+    """
+    Save the unquantized parameters to a file.
+    """
+    if "unquantize" in method:
+        params = {"coef": coef, "intercept": intercept}
+    elif "quantize" in method:
+        params = {
+            "coef_q": coef["q"],
+            "coef_scale": coef["scale"],
+            "coef_min": coef["min"],
+            "intercept_q": intercept["q"],
+            "intercept_scale": intercept["scale"],
+            "intercept_min": intercept["min"],
+        }
+    save_object(params, params_path)
+    print(f"{method} parameters saved to {params_path}")

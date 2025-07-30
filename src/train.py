@@ -2,7 +2,7 @@ from sklearn.linear_model import LinearRegression
 from src.utils import (
     load_datasets,
     train_and_split,
-    save_model,
+    save_object,
     evaluate_model,
 )
 from src.config import train_model_path
@@ -22,4 +22,4 @@ if __name__ == "__main__":
     data = load_datasets()
     model, metrics = train_model(data)
     print(metrics)
-    save_model(model, train_model_path)
+    save_object(model, train_model_path)

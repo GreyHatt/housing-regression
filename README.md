@@ -27,7 +27,7 @@ Commit ID: [36cd468](https://github.com/GreyHatt/housing-regression/commit/36cd4
         conda create env --name mlops python=3.11
         conda activate mlops
         pip install -r requirements.txt
-        python src/train.py
+        python -m src.train.py
         ```
     - After testing out locally below are the logs
         ```json
@@ -36,8 +36,9 @@ Commit ID: [36cd468](https://github.com/GreyHatt/housing-regression/commit/36cd4
         ```text
         Model saved to data/trained_model.pkl
         ```
+
 #### Step 3:
-Commit ID: 
+Commit ID: [bfe7fdd](https://github.com/GreyHatt/housing-regression/commit/bfe7fdda5f6bf14c35b6bf5eb6874052573d20a2)
 - Added commit ids and link to the previous steps.
 - Created `tests/test_train.py` file.
 - Changed a bit in `src/train.py` file to fetch the metrics.
@@ -55,3 +56,23 @@ teststest_trainpy ....                  [100%]
 ===================== 4 passed in 4.11s ================================================================
 (mlops) logan@Bhardwajs-MacBook-Air housing-regression % 
 ```
+
+#### Step 4:
+Commit ID: 
+- Created `src/quantize.py` file.
+- Add `load_model` method in `src/utils.py` file.
+- In `quantize.py` file
+    - I have created a generic script to save params in `src/utils.py`
+    - Commands to test
+        ```bash
+        python -m src.train
+        python -m src.quantize
+        ```
+    - Output
+        ```text
+        Quantization metrics: {'mean_absolute_error': 1.016262825917015, 'mean_squared_error': 1.546130459757296, 'r2_score': -0.17988390298792845}
+        ```
+    - However, if used in16
+        ```text
+        Quantization metrics: {'mean_absolute_error': 0.5344431924510482, 'mean_squared_error': 0.5559100099242476, 'r2_score': 0.5757736560455315}
+        ```
