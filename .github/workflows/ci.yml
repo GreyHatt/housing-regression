@@ -1,0 +1,56 @@
+name: CI/CD Pipeline
+
+on: 
+  push:
+    branches: main
+
+jobs:
+  test-suite:
+    name: Run Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Set uo Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Run Tests
+        run: pytest tests/
+  
+  train-and-quantize:
+    name: Train and Quantize Model
+    needs: test-suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Train Model
+        run: python -m src.train
+      - name: Quantize Model
+        run: python -m src.quantize
+      - name: Upload Model Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-artifact
+          path: models/
+  
+  build-and-test-container:
+    name: Build and Test Docker Container
+    needs: train-and-quantize
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Build Docker Image
+        run: docker build -t hosuing-regression:latest .
+      - name: Run Tests in Docker Container
+        run: docker run --rm housing-regression:latest

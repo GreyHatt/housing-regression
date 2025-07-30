@@ -92,7 +92,7 @@ Commit ID: [25bef92](https://github.com/GreyHatt/housing-regression/commit/25bef
         ```
 
 #### Step 5:
-Commit ID: 
+Commit ID: [bcaae43](https://github.com/GreyHatt/housing-regression/commit/bcaae435ae5b60b54cfb6a753fb39a99b16da798)
 - Created `Dockerfile` file.
 - Created `src/predict.py` file.
     - Printed sample predictions
@@ -117,3 +117,6 @@ Predicted: 2.6047, Actual: 2.7800
 Evaluation Metrics: {'mean_absolute_error': 0.5332001304956985, 'mean_squared_error': 0.5558915986952427, 'r2_score': 0.575787706032452}
 (mlops) logan@Bhardwajs-MacBook-Air housing-regression % 
 ```
+
+#### Step 6:
+- Created `CI/CD` workflow file.
