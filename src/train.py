@@ -15,10 +15,11 @@ def train_model(data):
     model = LinearRegression()
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
-    print(evaluate_model(y_test, y_pred))
-    return model
+    metrics = evaluate_model(y_test, y_pred)
+    return model, metrics
 
 if __name__ == "__main__":
     data = load_datasets()
-    model = train_model(data)
+    model, metrics = train_model(data)
+    print(metrics)
     save_model(model, train_model_path)
